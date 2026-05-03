@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Shahd Ashraf Fathy | Junior Flutter Developer</title>
   <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- AOS (Animate on Scroll) Library -->
+  <!-- AOS (Animate on Scroll) Library - keep enhanced -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     * {
@@ -22,6 +22,26 @@
       color: #1e1e2a;
       line-height: 1.5;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* animated gradient background (subtle moving gradient) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 40%, rgba(217,108,140,0.03) 0%, rgba(165,108,130,0.02) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: -2;
+      animation: slowDrift 18s infinite alternate ease-in-out;
+    }
+
+    @keyframes slowDrift {
+      0% { transform: scale(1) translate(0%, 0%); opacity: 0.6; }
+      100% { transform: scale(1.2) translate(2%, 3%); opacity: 1; }
     }
 
     /* custom scrollbar */
@@ -34,6 +54,10 @@
     ::-webkit-scrollbar-thumb {
       background: #d96c8c;
       border-radius: 12px;
+      transition: background 0.2s;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #b84f6f;
     }
 
     /* container */
@@ -43,7 +67,7 @@
       padding: 0 32px;
     }
 
-    /* navigation */
+    /* navigation with glassmorphism and smooth shadow */
     nav {
       backdrop-filter: blur(12px);
       background: rgba(255, 245, 248, 0.85);
@@ -52,7 +76,10 @@
       z-index: 100;
       padding: 18px 0;
       border-bottom: 1px solid rgba(217, 108, 140, 0.2);
-      transition: all 0.3s;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    nav:hover {
+      background: rgba(255, 245, 248, 0.95);
     }
     .nav-flex {
       display: flex;
@@ -61,13 +88,17 @@
       flex-wrap: wrap;
     }
     .logo {
-      font-weight: 700;
-      font-size: 1.6rem;
+      font-weight: 800;
+      font-size: 1.7rem;
       background: linear-gradient(135deg, #D96C8C, #A56C82);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
+      transition: transform 0.2s;
+    }
+    .logo:hover {
+      transform: scale(1.02);
     }
     .nav-links {
       display: flex;
@@ -80,14 +111,27 @@
       color: #2c2c3a;
       transition: 0.25s ease;
       font-size: 1rem;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #D96C8C;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
     }
     .nav-links a:hover {
       color: #D96C8C;
       transform: translateY(-2px);
-      display: inline-block;
     }
 
-    /* buttons and sections */
+    /* sections */
     section {
       padding: 80px 0;
       border-bottom: 1px solid rgba(217, 108, 140, 0.15);
@@ -112,6 +156,10 @@
       height: 4px;
       background: #E8A2B8;
       border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .section-title:hover:after {
+      width: 100px;
     }
 
     /* Hero */
@@ -129,22 +177,33 @@
       background: #ffeef3;
       color: #D96C8C;
       display: inline-block;
-      padding: 6px 16px;
+      padding: 6px 18px;
       border-radius: 40px;
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 24px;
       border: 1px solid #f3cddb;
+      backdrop-filter: blur(2px);
+      transition: all 0.2s;
+    }
+    .hero-badge:hover {
+      transform: translateX(5px);
+      background: #ffe2ec;
     }
     .hero-content h1 {
       font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.2;
-      background: linear-gradient(to right, #2d2d3a, #aa5e7a);
+      margin-bottom: 16px;
+      min-height: 4.2rem;
+    }
+    /* typing animation wrapper */
+    .typed-name {
+      background: linear-gradient(135deg, #2d2d3a, #aa5e7a);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 16px;
+      display: inline-block;
     }
     .hero-content .title {
       font-size: 1.6rem;
@@ -172,7 +231,7 @@
       font-weight: 600;
       color: white;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       box-shadow: 0 8px 20px rgba(217, 108, 140, 0.25);
       display: inline-flex;
       align-items: center;
@@ -181,8 +240,11 @@
     }
     .btn-primary:hover {
       background: #bf5a79;
-      transform: translateY(-3px);
-      box-shadow: 0 15px 25px rgba(217, 108, 140, 0.35);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 18px 28px rgba(217, 108, 140, 0.4);
+    }
+    .btn-primary:active {
+      transform: translateY(1px);
     }
     .btn-outline {
       background: transparent;
@@ -193,14 +255,18 @@
       color: #D96C8C;
       transition: 0.3s;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
     .btn-outline:hover {
       background: #D96C8C10;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: #bf5a79;
       color: #bf5a79;
+      box-shadow: 0 8px 16px rgba(217,108,140,0.2);
     }
-    /* profile image dynamic */
+    /* Floating animation for profile image */
     .hero-image {
       flex: 0.8;
       display: flex;
@@ -213,13 +279,20 @@
       border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
       background: linear-gradient(135deg, #ffeef4, #ffe2ec);
       box-shadow: 0 25px 40px rgba(0,0,0,0.1), 0 0 0 8px white, 0 0 0 12px #f5cddd;
-      transition: transform 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      animation: float 5s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
     }
     .profile-img:hover {
       transform: scale(1.02) rotate(1deg);
+      animation-play-state: paused; /* subtle pause on hover */
     }
 
-    /* contact cards */
+    /* contact cards enhanced hover */
     .contact-grid {
       display: flex;
       flex-wrap: wrap;
@@ -234,29 +307,31 @@
       align-items: center;
       gap: 18px;
       box-shadow: 0 12px 28px rgba(217, 108, 140, 0.08);
-      transition: all 0.25s;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       flex: 1 1 220px;
       border: 1px solid #fbe4ec;
     }
     .contact-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 30px rgba(217, 108, 140, 0.15);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 25px 35px rgba(217, 108, 140, 0.2);
       border-color: #e8a7bd;
+      background: #fffcfd;
     }
     .contact-icon {
       font-size: 2rem;
       color: #D96C8C;
+      transition: transform 0.2s;
+    }
+    .contact-card:hover .contact-icon {
+      transform: scale(1.1);
     }
     .contact-info a, .contact-info p {
       text-decoration: none;
       color: #2c2c3a;
       font-weight: 500;
     }
-    .contact-info a:hover {
-      color: #D96C8C;
-    }
 
-    /* skills chips */
+    /* skills chips elastic */
     .skills-wrapper {
       display: flex;
       flex-wrap: wrap;
@@ -271,16 +346,18 @@
       color: #35262e;
       box-shadow: 0 2px 6px rgba(0,0,0,0.02);
       border: 1px solid #f3cfdd;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      cursor: default;
     }
     .skill-chip:hover {
       background: #D96C8C;
       color: white;
       border-color: #D96C8C;
-      transform: scale(1.02);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 18px rgba(217,108,140,0.3);
     }
 
-    /* projects cards */
+    /* projects grid hover effect */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -292,30 +369,46 @@
       backdrop-filter: blur(2px);
       border-radius: 28px;
       padding: 28px 22px;
-      transition: all 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
       border: 1px solid #fff0f5;
       box-shadow: 0 12px 24px -12px rgba(0,0,0,0.05);
     }
     .project-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-12px);
       border-color: #eeb7cc;
-      box-shadow: 0 20px 32px -12px rgba(217, 108, 140, 0.2);
+      box-shadow: 0 28px 36px -14px rgba(217, 108, 140, 0.25);
+      background: white;
     }
     .project-icon {
       font-size: 2.2rem;
       color: #D96C8C;
       margin-bottom: 18px;
+      transition: transform 0.2s;
+    }
+    .project-card:hover .project-icon {
+      transform: scale(1.08);
     }
     .project-card h3 {
       font-size: 1.5rem;
       margin-bottom: 12px;
     }
-    .project-card p {
-      color: #4e4352;
-      font-size: 0.9rem;
+
+    /* Education + Languages side by side (new refined row) */
+    .edu-lang-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 20px;
     }
-    /* education & certs */
-    .edu-item, .cert-item {
+    .edu-box {
+      flex: 1.2;
+      min-width: 240px;
+    }
+    .lang-box {
+      flex: 1;
+      min-width: 240px;
+    }
+    .edu-item {
       margin-bottom: 24px;
       padding: 10px 0;
     }
@@ -332,6 +425,10 @@
       margin-bottom: 14px;
       padding-left: 22px;
       position: relative;
+      transition: transform 0.2s;
+    }
+    .cert-list li:hover {
+      transform: translateX(6px);
     }
     .cert-list li:before {
       content: "▹";
@@ -339,14 +436,31 @@
       position: absolute;
       left: 0;
     }
-    .lang-badge {
-      background: #fff0f5;
-      border-radius: 28px;
-      padding: 8px 24px;
-      display: inline-block;
-      margin-right: 16px;
-      margin-bottom: 12px;
-      font-weight: 500;
+    /* Modern language badges */
+    .lang-badge-modern {
+      background: linear-gradient(115deg, #fff4f8, #ffffff);
+      border-radius: 40px;
+      padding: 10px 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-right: 18px;
+      margin-bottom: 18px;
+      font-weight: 600;
+      color: #634c5a;
+      border: 1px solid #f5ccdd;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: all 0.25s;
+    }
+    .lang-badge-modern i {
+      color: #D96C8C;
+      font-size: 1.2rem;
+    }
+    .lang-badge-modern:hover {
+      transform: translateY(-4px);
+      background: white;
+      border-color: #e0a6bd;
+      box-shadow: 0 12px 18px rgba(217,108,140,0.1);
     }
 
     footer {
@@ -356,6 +470,7 @@
       font-size: 0.85rem;
     }
 
+    /* responsive adjust */
     @media (max-width: 780px) {
       .hero {
         flex-direction: column-reverse;
@@ -383,6 +498,10 @@
         width: 260px;
         height: 260px;
       }
+      .edu-lang-row {
+        flex-direction: column;
+        gap: 30px;
+      }
     }
   </style>
 </head>
@@ -405,9 +524,9 @@
   <!-- Hero Section -->
   <section id="home">
     <div class="container hero">
-      <div class="hero-content" data-aos="fade-right" data-aos-duration="800">
+      <div class="hero-content" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
         <div class="hero-badge"><i class="fas fa-code"></i> Flutter Dev</div>
-        <h1>Shahd Ashraf Fathy</h1>
+        <h1><span class="typed-name" id="typedName"></span></h1>
         <div class="title">Junior Flutter Developer</div>
         <p class="hero-desc">Building cross-platform apps with elegant UI and smooth logic — passionate about creating meaningful mobile experiences.</p>
         <div class="btn-group">
@@ -415,18 +534,18 @@
           <a href="#projects" class="btn-outline"><i class="fas fa-chevron-circle-down"></i> Explore work</a>
         </div>
       </div>
-      <div class="hero-image" data-aos="fade-left" data-aos-duration="800">
+      <div class="hero-image" data-aos="fade-left" data-aos-duration="900">
         <!-- dynamic profile image from same folder: "profile.jpg" or "profile.png" -->
-        <img src="profile.jpg" alt="Shahd Ashraf Fathy" class="profile-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/320x320?text=Shahd+Photo'; this.style.objectFit='cover';">
+        <img src="profile.jpg" alt="Shahd Ashraf Fathy" class="profile-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/320x320?text=📱+Shahd+Photo'; this.style.objectFit='cover';">
       </div>
     </div>
   </section>
 
   <!-- Objective Section -->
   <section>
-    <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up" data-aos-duration="700">
       <h2 class="section-title">Objective</h2>
-      <div style="background: white; border-radius: 32px; padding: 28px 34px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border:1px solid #ffe3ed;">
+      <div style="background: white; border-radius: 32px; padding: 28px 34px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border:1px solid #ffe3ed; transition: all 0.25s;">
         <p style="font-size: 1.1rem; line-height: 1.55; color: #2c2c3a;">🌟 "Enthusiastic Flutter developer with 1 year of experience, aiming to contribute to innovative projects through efficient coding and problem-solving skills and looking to create user-friendly mobile applications and enhance user experience."</p>
       </div>
     </div>
@@ -434,7 +553,7 @@
 
   <!-- Contact Section -->
   <section id="contact">
-    <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up" data-aos-duration="700">
       <h2 class="section-title">Contact</h2>
       <div class="contact-grid">
         <div class="contact-card">
@@ -459,7 +578,7 @@
 
   <!-- Skills Section -->
   <section id="skills">
-    <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up" data-aos-duration="700">
       <h2 class="section-title">Tech & Skills</h2>
       <div class="skills-wrapper">
         <span class="skill-chip">Dart</span><span class="skill-chip">C++</span><span class="skill-chip">C</span>
@@ -482,7 +601,7 @@
 
   <!-- Projects Section -->
   <section id="projects">
-    <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up" data-aos-duration="800">
       <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
@@ -509,11 +628,12 @@
     </div>
   </section>
 
-  <!-- Education + Certificates + Languages combined modern -->
+  <!-- Education + Languages side by side (NEW layout) -->
   <section id="education">
-    <div class="container" data-aos="fade-up">
-      <div style="display: flex; flex-wrap: wrap; gap: 40px;">
-        <div style="flex:1.2">
+    <div class="container" data-aos="fade-up" data-aos-duration="800">
+      <div class="edu-lang-row">
+        <!-- Education block -->
+        <div class="edu-box">
           <h2 class="section-title">Education</h2>
           <div class="edu-item">
             <div class="flex-between">
@@ -522,22 +642,26 @@
             </div>
             <p style="font-weight: 500; margin-top: 6px;">Bachelor of Computers and Informatics (FCI) — Computer Science Department</p>
           </div>
+          <div style="margin-top: 32px;">
+            <h2 class="section-title" style="margin-bottom: 1.2rem;">Certificates</h2>
+            <ul class="cert-list">
+              <li>🏆 ICPC - International Collegiate Programming Contest (2023)</li>
+              <li>💳 Flutter Payment Integration: Stripe, PayPal & More! [Arabic]</li>
+              <li>📱 Flutter Advanced Course Bloc and MVVM Pattern</li>
+            </ul>
+          </div>
         </div>
-        <div style="flex:1.5">
-          <h2 class="section-title">Certificates</h2>
-          <ul class="cert-list">
-            <li>🏆 ICPC - International Collegiate Programming Contest (2023)</li>
-            <li>💳 Flutter Payment Integration: Stripe, PayPal & More! [Arabic]</li>
-            <li>📱 Flutter Advanced Course Bloc and MVVM Pattern</li>
-          </ul>
-        </div>
-      </div>
-      <!-- Languages -->
-      <div style="margin-top: 48px;">
-        <h2 class="section-title">Languages</h2>
-        <div>
-          <span class="lang-badge"><i class="fas fa-comment"></i> Arabic (Mother tongue)</span>
-          <span class="lang-badge"><i class="fas fa-language"></i> English (Professional working proficiency)</span>
+        <!-- Languages block next to Education -->
+        <div class="lang-box">
+          <h2 class="section-title">Languages</h2>
+          <div style="margin-top: 20px;">
+            <span class="lang-badge-modern"><i class="fas fa-comment-dots"></i> Arabic <span style="font-weight: 400; font-size:0.8rem;">(Mother tongue)</span></span>
+            <span class="lang-badge-modern"><i class="fas fa-language"></i> English <span style="font-weight: 400;">(Fluent / Professional)</span></span>
+          </div>
+          <!-- Optional stylistic info: adds harmony -->
+          <div style="margin-top: 48px; background: rgba(217,108,140,0.05); border-radius: 28px; padding: 20px;">
+            <p style="font-size: 0.9rem; color:#b37b92;"><i class="fas fa-globe-americas"></i> Open to international collaborations</p>
+          </div>
         </div>
       </div>
     </div>
@@ -550,16 +674,37 @@
   </div>
 </footer>
 
-<!-- AOS init & smooth scroll -->
+<!-- AOS + Typing Effect + extra animations -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+  // Initialize AOS with smoother reveals
   AOS.init({
     duration: 800,
     once: true,
-    offset: 50,
+    offset: 60,
+    easing: 'ease-out-quad',
   });
 
-  // smooth anchor navigation
+  // Typing animation for name (Shahd Ashraf Fathy)
+  const typedNameSpan = document.getElementById('typedName');
+  const fullName = "Shahd Ashraf Fathy";
+  let index = 0;
+  function typeWriter() {
+    if (index < fullName.length) {
+      typedNameSpan.textContent += fullName.charAt(index);
+      index++;
+      setTimeout(typeWriter, 90);
+    } else {
+      // optional blinking cursor effect after finish
+      typedNameSpan.style.borderRight = "2px solid #D96C8C";
+      setTimeout(() => {
+        typedNameSpan.style.borderRight = "none";
+      }, 800);
+    }
+  }
+  typeWriter();
+
+  // Smooth anchor navigation with active offset
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -567,10 +712,14 @@
       const target = document.querySelector(href);
       if(target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const offsetTop = target.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
       }
     });
   });
+
+  // Additional subtle hover parallax for cards? not needed, but ensures performance
+  // add background particle effect? simple gradient drift handled in body::before
 </script>
 </body>
 </html>
