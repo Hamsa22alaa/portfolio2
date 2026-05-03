@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Shahd Ashraf Fathy | Junior Flutter Developer</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS (Animate on Scroll) Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #fff9fc 0%, #fef4f8 100%);
+      color: #1e1e2a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1e2e8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d96c8c;
+      border-radius: 12px;
+    }
+
+    /* container */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* navigation */
+    nav {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 245, 248, 0.85);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(217, 108, 140, 0.2);
+      transition: all 0.3s;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, #D96C8C, #A56C82);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c2c3a;
+      transition: 0.25s ease;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #D96C8C;
+      transform: translateY(-2px);
+      display: inline-block;
+    }
+
+    /* buttons and sections */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(217, 108, 140, 0.15);
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(120deg, #D96C8C, #b45b7a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: #E8A2B8;
+      border-radius: 4px;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 48px;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-badge {
+      background: #ffeef3;
+      color: #D96C8C;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid #f3cddb;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #2d2d3a, #aa5e7a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+    .hero-content .title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #6b4c5c;
+      margin-bottom: 28px;
+      letter-spacing: -0.2px;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: #4a4150;
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #D96C8C;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(217, 108, 140, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: #bf5a79;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(217, 108, 140, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #D96C8C;
+      padding: 10px 26px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #D96C8C;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: #D96C8C10;
+      transform: translateY(-2px);
+      border-color: #bf5a79;
+      color: #bf5a79;
+    }
+    /* profile image dynamic */
+    .hero-image {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+    }
+    .profile-img {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      background: linear-gradient(135deg, #ffeef4, #ffe2ec);
+      box-shadow: 0 25px 40px rgba(0,0,0,0.1), 0 0 0 8px white, 0 0 0 12px #f5cddd;
+      transition: transform 0.4s ease;
+    }
+    .profile-img:hover {
+      transform: scale(1.02) rotate(1deg);
+    }
+
+    /* contact cards */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 20px;
+    }
+    .contact-card {
+      background: white;
+      padding: 20px 28px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 12px 28px rgba(217, 108, 140, 0.08);
+      transition: all 0.25s;
+      flex: 1 1 220px;
+      border: 1px solid #fbe4ec;
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px rgba(217, 108, 140, 0.15);
+      border-color: #e8a7bd;
+    }
+    .contact-icon {
+      font-size: 2rem;
+      color: #D96C8C;
+    }
+    .contact-info a, .contact-info p {
+      text-decoration: none;
+      color: #2c2c3a;
+      font-weight: 500;
+    }
+    .contact-info a:hover {
+      color: #D96C8C;
+    }
+
+    /* skills chips */
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .skill-chip {
+      background: white;
+      padding: 10px 26px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #35262e;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      border: 1px solid #f3cfdd;
+      transition: all 0.2s;
+    }
+    .skill-chip:hover {
+      background: #D96C8C;
+      color: white;
+      border-color: #D96C8C;
+      transform: scale(1.02);
+    }
+
+    /* projects cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+    .project-card {
+      background: #ffffffdd;
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      padding: 28px 22px;
+      transition: all 0.3s ease;
+      border: 1px solid #fff0f5;
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.05);
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: #eeb7cc;
+      box-shadow: 0 20px 32px -12px rgba(217, 108, 140, 0.2);
+    }
+    .project-icon {
+      font-size: 2.2rem;
+      color: #D96C8C;
+      margin-bottom: 18px;
+    }
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .project-card p {
+      color: #4e4352;
+      font-size: 0.9rem;
+    }
+    /* education & certs */
+    .edu-item, .cert-item {
+      margin-bottom: 24px;
+      padding: 10px 0;
+    }
+    .flex-between {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .cert-list {
+      list-style: none;
+    }
+    .cert-list li {
+      margin-bottom: 14px;
+      padding-left: 22px;
+      position: relative;
+    }
+    .cert-list li:before {
+      content: "▹";
+      color: #D96C8C;
+      position: absolute;
+      left: 0;
+    }
+    .lang-badge {
+      background: #fff0f5;
+      border-radius: 28px;
+      padding: 8px 24px;
+      display: inline-block;
+      margin-right: 16px;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      color: #887580;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .section-title:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+      .nav-flex {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .container {
+        padding: 0 24px;
+      }
+      .profile-img {
+        width: 260px;
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-flex">
+    <span class="logo">Shahd.dev</span>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section -->
+  <section id="home">
+    <div class="container hero">
+      <div class="hero-content" data-aos="fade-right" data-aos-duration="800">
+        <div class="hero-badge"><i class="fas fa-code"></i> Flutter Dev</div>
+        <h1>Shahd Ashraf Fathy</h1>
+        <div class="title">Junior Flutter Developer</div>
+        <p class="hero-desc">Building cross-platform apps with elegant UI and smooth logic — passionate about creating meaningful mobile experiences.</p>
+        <div class="btn-group">
+          <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Get in touch</a>
+          <a href="#projects" class="btn-outline"><i class="fas fa-chevron-circle-down"></i> Explore work</a>
+        </div>
+      </div>
+      <div class="hero-image" data-aos="fade-left" data-aos-duration="800">
+        <!-- dynamic profile image from same folder: "profile.jpg" or "profile.png" -->
+        <img src="profile.jpg" alt="Shahd Ashraf Fathy" class="profile-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/320x320?text=Shahd+Photo'; this.style.objectFit='cover';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Objective Section -->
+  <section>
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Objective</h2>
+      <div style="background: white; border-radius: 32px; padding: 28px 34px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border:1px solid #ffe3ed;">
+        <p style="font-size: 1.1rem; line-height: 1.55; color: #2c2c3a;">🌟 "Enthusiastic Flutter developer with 1 year of experience, aiming to contribute to innovative projects through efficient coding and problem-solving skills and looking to create user-friendly mobile applications and enhance user experience."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="contact-info"><p>(+20) 1204543082</p></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-info"><a href="mailto:shahdashraf396@gmail.com">shahdashraf396@gmail.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-info"><p>Egypt, Ismailia</p></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+          <div class="contact-info"><a href="https://www.linkedin.com/in/shahd-ashraf-343333254/" target="_blank">LinkedIn Profile</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Tech & Skills</h2>
+      <div class="skills-wrapper">
+        <span class="skill-chip">Dart</span><span class="skill-chip">C++</span><span class="skill-chip">C</span>
+        <span class="skill-chip">Python</span><span class="skill-chip">HTML</span><span class="skill-chip">Flutter</span>
+        <span class="skill-chip">Android Studio</span><span class="skill-chip">VS Code</span><span class="skill-chip">GitHub</span>
+        <span class="skill-chip">OOP</span><span class="skill-chip">Problem Solving</span><span class="skill-chip">Data Structure</span>
+        <span class="skill-chip">API</span><span class="skill-chip">Firebase</span>
+      </div>
+      <div style="margin-top: 28px;">
+        <h3 style="color:#D96C8C; margin-bottom: 12px;">🔧 Framework & Concepts</h3>
+        <div class="skills-wrapper">
+          <span class="skill-chip">Flutter (Bloc/MVVM)</span>
+          <span class="skill-chip">RESTful APIs</span>
+          <span class="skill-chip">Firebase Auth</span>
+          <span class="skill-chip">Cloud Firestore</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-credit-card"></i></div>
+          <h3>Payment App</h3>
+          <p>Seamless payment integration with Stripe & PayPal, secure transactions and smooth UI.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-comments"></i></div>
+          <h3>Chat App</h3>
+          <p>Real-time messaging, user auth (register/login), image sharing, Firebase Auth, Firestore & Storage.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-book-open"></i></div>
+          <h3>Bookly App</h3>
+          <p>Discover and organize books, dynamic UI with state management, reading progress tracker.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+          <h3>Weather App</h3>
+          <p>Search cities, live weather data using API, beautiful illustrations and responsive design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education + Certificates + Languages combined modern -->
+  <section id="education">
+    <div class="container" data-aos="fade-up">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+        <div style="flex:1.2">
+          <h2 class="section-title">Education</h2>
+          <div class="edu-item">
+            <div class="flex-between">
+              <h3 style="font-weight: 700;">🎓 Suez Canal University</h3>
+              <span style="color:#D96C8C;">2021 - 2025</span>
+            </div>
+            <p style="font-weight: 500; margin-top: 6px;">Bachelor of Computers and Informatics (FCI) — Computer Science Department</p>
+          </div>
+        </div>
+        <div style="flex:1.5">
+          <h2 class="section-title">Certificates</h2>
+          <ul class="cert-list">
+            <li>🏆 ICPC - International Collegiate Programming Contest (2023)</li>
+            <li>💳 Flutter Payment Integration: Stripe, PayPal & More! [Arabic]</li>
+            <li>📱 Flutter Advanced Course Bloc and MVVM Pattern</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Languages -->
+      <div style="margin-top: 48px;">
+        <h2 class="section-title">Languages</h2>
+        <div>
+          <span class="lang-badge"><i class="fas fa-comment"></i> Arabic (Mother tongue)</span>
+          <span class="lang-badge"><i class="fas fa-language"></i> English (Professional working proficiency)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Shahd Ashraf Fathy — Junior Flutter Developer • Built with <i class="fas fa-heart" style="color:#D96C8C;"></i> & modern design</p>
+  </div>
+</footer>
+
+<!-- AOS init & smooth scroll -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 50,
+  });
+
+  // smooth anchor navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if(href === "#" || href === "") return;
+      const target = document.querySelector(href);
+      if(target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
